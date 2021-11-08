@@ -1,0 +1,22 @@
+{% extends 'base.html.j2' %}
+{%block content%}
+
+{% for item in items%}
+    <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+        <a href="{{item.img}}"><img class="card-img-top" src={{item.img}} alt=""></a>
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="{{url_for('shop.one_item', item_id=item.id)}}">{{item.name}}</a>
+            </h5>
+            <h5>${{(item.price)}}</h5>
+            <p class="card-text">{{item.description}}</p>
+        </div>
+        <div class="card-footer">
+            <a class="float-center"><a class="btn btn-danger" 
+            href="{{url_for('shop.add_to_cart', id=item.id)}}">Add To Cart</a>
+        </div>
+    </div>
+{%endfor%}
+
+{%endblock%}
+

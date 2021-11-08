@@ -1,0 +1,28 @@
+{% extends 'base.html.j2' %}
+
+{%block content%}
+<div class="card text-dark bg-light mb-3">
+    <h5>Items in your cart</h5>
+        {% for item in current_user.my_cart_items_unique() %}
+    <div class="table-responsive">
+        <table class="table shoping-cart-table">
+            <tbody>
+                <tr>
+                    <td width="90">                                        
+                        <img src="{{item.img}}" width="75">                                       
+                    </td>
+                    <td>
+                        <h4>{{item.name}} - {{(item.price)}}</h4>
+                        <p >{{item.description}}</p>
+                        <a href="{{url_for('shop.remove_item', id=item.id)}}"> Remove item</a>
+                    </td>    
+                </tr>
+            </tbody>
+        </table>
+        {%endfor%}
+        <h3> Subtotal ${{(current_user.cart_total())}} </h3>
+        <br>
+        <form action="{{url_for('shop.products')}}"><button class="btn btn-dark"> Continue shopping</button></form> 
+    </div>
+</div>
+{%endblock%}
